@@ -10,7 +10,7 @@ const pricingPlans = [
   {
     name: "Basic",
     price: "9",
-    priceId: "price_1PyFKGBibz3ZDixDAaJ3HO74",
+    priceId: "price_1QBL9nSIdAkNfEsoZqMWcZ8U",
     features: [
       "100 AI-generated posts per month",
       "Twitter thread generation",
@@ -20,7 +20,7 @@ const pricingPlans = [
   {
     name: "Pro",
     price: "29",
-    priceId: "price_1PyFN0Bibz3ZDixDqm9eYL8W",
+    priceId: "price_1QBLC4SIdAkNfEso37NXefh4",
     features: [
       "500 AI-generated posts per month",
       "Twitter, Instagram, and LinkedIn content",
@@ -116,7 +116,7 @@ export default function PricingPage() {
                 ))}
               </ul>
               <Button
-                // onClick={() => plan.priceId && handleSubscribe(plan.priceId)}
+                onClick={() => plan.priceId && handleSubscribe(plan.priceId)}
                 disabled={isLoading || !plan.priceId}
                 className="w-full bg-white text-black hover:bg-gray-200"
               >
