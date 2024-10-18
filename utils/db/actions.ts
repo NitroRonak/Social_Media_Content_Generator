@@ -1,13 +1,15 @@
 import { db } from "./dbConfig";
 import { eq, sql, desc } from "drizzle-orm";
 import { Users, Subscriptions, GeneratedContent } from "./schema";
+import { sendWelcomeEmail } from "../mailtrap";
 export async function createOrUpdateUser(
   clerkUserId: string,
   email: string,
   name: string
 ) {
   try {
-    const existingUser = await db
+    console.log("Creating or updating user:", clerkUserId, email, name);
+    const [existingUser] = await db
       .select()
       .from(Users)
       .where(eq(Users.stripeCustomerId, clerkUserId))
@@ -24,6 +26,7 @@ export async function createOrUpdateUser(
         .where(eq(Users.stripeCustomerId, clerkUserId))
         .returning()
         .execute();
+        console.log("Updated user:", updatedUser);
       return updatedUser;
     }
 
@@ -39,6 +42,7 @@ export async function createOrUpdateUser(
     console.log("new user created", newUser);
 
     //send welcome email to new user
+    // await sendWelcomeEmail(email, name);
   } catch (error) {
     console.error("Error creating or updating user:", error);
     return null;
